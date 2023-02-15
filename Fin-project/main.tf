@@ -23,7 +23,7 @@ resource "aws_launch_configuration" "frontend" {
   image_id        = data.aws_ami.latest_vm_linux.id
   instance_type   = "t2.micro"
   security_groups = [aws_security_group.frontend.id]
-  #user_data       = file("user_data.sh")
+  user_data       = file("user_data.sh")
 
   lifecycle {
     create_before_destroy = true
@@ -45,7 +45,7 @@ resource "aws_autoscaling_group" "frontend" {
   dynamic "tag" {
     for_each = {
       Name   = "frontendServer in ASG"
-      Owner  = "Oleksandr Pavliuk"
+      Owner  = "Alex"
       TAGKEY = "TAGVALUE"
     }
     content {
